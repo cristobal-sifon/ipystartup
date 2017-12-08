@@ -99,4 +99,4 @@ def update_rcParams(line):
     _update_rcParams(line)
 
 
-del astropy, future, import_all, np, plt, update_rcParams
+del astropy, display, future, import_all, np, plt, update_rcParams
