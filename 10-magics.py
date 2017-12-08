@@ -2,6 +2,7 @@
 # Based on https://goo.gl/RLn7Lq
 
 from IPython.core.magic import register_line_cell_magic
+# python 2/3 compatibility for string types
 from six import string_types
 
 ip = get_ipython()
@@ -18,14 +19,14 @@ def _exec(cmd, line):
         ip.ex(c)
 
 
-def _display(line):
-    cmd = 'from IPython.display import display'
-    _exec(cmd, line)
-
-
 def _future_imports(line):
     cmd = 'from __future__ import (' \
           'absolute_import, division, print_function, unicode_literals)'
+    _exec(cmd, line)
+
+
+def _import_display(line):
+    cmd = 'from IPython.display import display'
     _exec(cmd, line)
 
 
@@ -67,7 +68,7 @@ def _print_cmd(cmd, line):
 @register_line_cell_magic
 def import_all(line):
     _future_imports(line)
-    _display(line)
+    _import_display(line)
     _import_astropy(line)
     _import_np(line)
     _import_plt(line)
@@ -77,6 +78,11 @@ def import_all(line):
 @register_line_cell_magic
 def astropy(line):
     _import_astropy(line)
+
+
+@register_line_cell_magic
+def display(line):
+    _import_display(line)
 
 
 @register_line_cell_magic
