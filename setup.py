@@ -6,7 +6,7 @@ import os
 import shutil
 
 """
-Copy files from 
+Copy files from this repository to the IPython configuration directory
 """
 
 # determine to which IPython profile does this setup correspond
