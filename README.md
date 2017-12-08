@@ -1,7 +1,13 @@
 # ipystartup
 Custom IPython startup configuration files
 
-The file `10-magics.py` contains a set of custom magic commands:
+### Notifications
+
+`00-notify.py` enables notifications per https://github.com/ShopRunner/jupyter-notify
+
+### `magic` commands
+
+`10-magics.py` is based on [this repo](https://github.com/saimn/dotfiles/blob/master/ipython/profile_default/startup/10-mystartup.py) and contains a set of custom magic commands:
 
 ```
 astropy
