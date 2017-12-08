@@ -2,48 +2,57 @@
 # Based on https://goo.gl/RLn7Lq
 
 from IPython.core.magic import register_line_cell_magic
+from six import string_types
 
 ip = get_ipython()
+
+
+def _exec(cmd, line):
+    """
+    Wrapper to execute IPython command and, if requested, print the command
+    """
+    if isinstance(cmd, string_types):
+        cmd = [cmd]
+    for c in cmd:
+        _print_cmd(c, line)
+        ip.ex(c)
+
+
+def _display(line):
+    cmd = 'from IPython.display import display'
+    _exec(cmd, line)
 
 
 def _future_imports(line):
     cmd = 'from __future__ import (' \
           'absolute_import, division, print_function, unicode_literals)'
-    _print_cmd(cmd, line)
-    ip.ex(cmd)
+    _exec(cmd, line)
 
 
 def _import_astropy(line):
-    cmds = ['import astropy',
-            'from astropy import constants, units as u',
-            'from astropy.io import ascii, fits',
-            'from astropy.table import Column, MaskedColumn, QTable, Table']
-    for cmd in cmds:
-        _print_cmd(cmd, line)
-        ip.ex(cmd)
+    cmd = ['import astropy',
+           'from astropy import constants, units as u',
+           'from astropy.io import ascii, fits',
+           'from astropy.table import Column, MaskedColumn, QTable, Table']
+    _exec(cmd, line)
 
 
 def _import_np(line):
-    cmds = ['import numpy as np',
-            'from numpy import random']
-    for cmd in cmds:
-        _print_cmd(cmd, line)
-        ip.ex(cmd)
+    cmd = ['import numpy as np',
+           'from numpy import random']
+    _exec(cmd, line)
 
 
 def _import_plt(line):
     cmd = 'from matplotlib import pyplot as plt'
-    _print_cmd(cmd, line)
-    ip.ex(cmd)
+    _exec(cmd, line)
 
 
 def _update_rcParams(line):
     try:
-        cmds = ['from plottools.plotutils import update_rcParams',
-                'update_rcParams()']
-        for cmd in cmds:
-            _print_cmd(cmd, line)
-            ip.ex(cmd)
+        cmd = ['from plottools.plotutils import update_rcParams',
+               'update_rcParams()']
+        _exec(cmd, line)
     except ImportError:
         pass
 
@@ -58,8 +67,7 @@ def _print_cmd(cmd, line):
 @register_line_cell_magic
 def import_all(line):
     _future_imports(line)
-    cmd = 'from IPython.display import display'
-    ip.ex(cmd)
+    _display(line)
     _import_astropy(line)
     _import_np(line)
     _import_plt(line)
