@@ -44,14 +44,11 @@ def _import_np(line):
     _exec(cmd, line)
 
 
-def _import_plt(line):
+def _plotting(line):
     cmd = 'from matplotlib import pyplot as plt'
     _exec(cmd, line)
-
-
-def _update_rcParams(line):
     try:
-        cmd = ['from plottools.plotutils import update_rcParams',
+        cmd = ['from plottools.plotutils import savefig, update_rcParams',
                'update_rcParams()']
         _exec(cmd, line)
     except ImportError:
@@ -71,8 +68,7 @@ def import_all(line):
     _import_display(line)
     _import_astropy(line)
     _import_np(line)
-    _import_plt(line)
-    _update_rcParams(line)
+    _plotting(line)
 
 
 @register_line_cell_magic
@@ -96,8 +92,8 @@ def np(line):
 
 
 @register_line_cell_magic
-def plt(line):
-    _import_plt(line)
+def plotting(line):
+    _plotting(line)
 
 
 @register_line_cell_magic
@@ -105,4 +101,4 @@ def update_rcParams(line):
     _update_rcParams(line)
 
 
-del astropy, display, future, import_all, np, plt, update_rcParams
+del astropy, display, future, import_all, np, plotting
