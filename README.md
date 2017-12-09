@@ -1,6 +1,12 @@
 # ipystartup
 Custom IPython startup configuration files
 
+Running
+```
+python setup.py [profile]
+```
+will copy the files below to `~/.ipython/profile_<profile>/startup/`, which means all the definitions in them will be available when starting an `IPython` session, be it in the terminal or a `Jupyter` notebook.
+
 ### Notifications
 
 `00-notify.py` enables notifications per https://github.com/ShopRunner/jupyter-notify
@@ -14,8 +20,7 @@ astropy
 display
 future
 np
-plt
-update_rcParams
+plotting
 ```
 
 in addition to a wrapper that executes all of them, `import_all`. In order to know exactly what each does, call any of them with the `-v` flag, e.g.,
@@ -26,4 +31,3 @@ import numpy as np
 from numpy import random
 ```
 
-The magic command `update_rcParams` requires [`plottools`](https://github.com/cristobal-sifon/plottools), and will be ignored if the package is not present.
