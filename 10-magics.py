@@ -52,6 +52,9 @@ def _plotting(line):
                'update_rcParams()']
         _exec(cmd, line)
     except ImportError:
+        if '-v' in line:
+            print('WARNING: Could not import module `plottools`. To install,' \
+                  ' go to https://github.com/cristobal-sifon/plottools')
         pass
 
 
