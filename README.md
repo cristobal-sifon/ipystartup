@@ -5,7 +5,7 @@ Running
 ```
 python setup.py [profile]
 ```
-will copy the files below to `~/.ipython/profile_<profile>/startup/`, which means all the definitions in them will be available when starting an `IPython` session, be it in the terminal or a `Jupyter` notebook.
+will copy the files below to `~/.ipython/profile_<profile>/startup/`, which means all the definitions in them will be available when starting an `IPython` session, be it in the terminal or a `Jupyter` notebook. If `profile` is not specified, the default profile will be updated.
 
 ### Notifications
 
