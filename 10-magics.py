@@ -33,6 +33,8 @@ def _import_display(line):
 def _import_astropy(line):
     cmd = ['import astropy',
            'from astropy import constants, units as u',
+           'from astropy import cosmology',
+           'from astropy.coordinates import SkyCoord',
            'from astropy.io import ascii, fits',
            'from astropy.table import Column, MaskedColumn, QTable, Table']
     _exec(cmd, line)
