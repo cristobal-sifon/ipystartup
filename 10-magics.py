@@ -46,6 +46,11 @@ def _import_np(line):
     _exec(cmd, line)
 
 
+def _import_os(line):
+    cmd = 'import os'
+    _exec(cmd, line)
+
+
 def _plotting(line):
     cmd = 'from matplotlib import pyplot as plt'
     _exec(cmd, line)
@@ -73,6 +78,7 @@ def import_all(line):
     _import_display(line)
     _import_astropy(line)
     _import_np(line)
+    _import_os(line)
     _plotting(line)
 
 
