@@ -52,7 +52,7 @@ def _import_os(line):
 
 
 def _plotting(line):
-    cmd = 'from matplotlib import pyplot as plt'
+    cmd = 'from matplotlib import pyplot as plt, ticker'
     _exec(cmd, line)
     try:
         cmd = ['from plottools.plotutils import savefig, update_rcParams',
