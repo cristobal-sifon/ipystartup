@@ -37,6 +37,7 @@ for f in pyfiles:
 
 # update IPython startup configuration file
 # under construction - doesn't do anything for now
+"""
 if args.notify:
     head = 'c.InteractiveShellApp.exec_lines = ['
     cmds = ['import jupyternotify',
@@ -51,7 +52,7 @@ if args.notify:
         if in_exec_lines and line.startswith(']'):
             in_exec_lines = False
             break
-    
+""" 
 
 
 
