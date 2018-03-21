@@ -1,6 +1,7 @@
+"""Custom IPython magic commands"""
+
 #   ~/.ipython/profile_default/startup/10-mystartup.py
 # Based on https://goo.gl/RLn7Lq
-
 from IPython.core.magic import register_line_cell_magic
 # python 2/3 compatibility for string types
 from six import string_types
@@ -30,13 +31,29 @@ def _import_display(line):
     _exec(cmd, line)
 
 
+def _import_astLib(line):
+    cmd = ['from astLib import astCoords',
+           'from astLib.astWCS import WCS']
+    _exec(cmd, line)
+
+
 def _import_astropy(line):
     cmd = ['import astropy',
            'from astropy import constants, units as u',
            'from astropy import cosmology',
-           'from astropy.coordinates import SkyCoord',
+           'from astropy.coordinates import FK5, SkyCoord',
            'from astropy.io import ascii, fits',
-           'from astropy.table import Column, MaskedColumn, QTable, Table']
+           'from astropy.table import Column, MaskedColumn, QTable, Table,' \
+                ' vstack',
+           'from astropy.wcs import WCS']
+    _exec(cmd, line)
+
+
+def _import_mine(line):
+    cmd = ['import lnr',
+           'from plottools import *',
+           'import readfile',
+           'import stattools']
     _exec(cmd, line)
 
 
@@ -76,10 +93,17 @@ def _print_cmd(cmd, line):
 def import_all(line):
     _future_imports(line)
     _import_display(line)
+    _import_astLib(line)
     _import_astropy(line)
     _import_np(line)
     _import_os(line)
+    _import_mine(line)
     _plotting(line)
+
+
+@register_line_cell_magic
+def astLib(line):
+    _import_astLib(line)
 
 
 @register_line_cell_magic
@@ -95,6 +119,11 @@ def display(line):
 @register_line_cell_magic
 def future(line):
     _future_imports(line)
+
+
+@register_line_cell_magic
+def mine(line):
+    _import_mine(line)
 
 
 @register_line_cell_magic
