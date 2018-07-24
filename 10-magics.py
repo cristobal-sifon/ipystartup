@@ -5,6 +5,7 @@
 from IPython.core.magic import register_line_cell_magic
 # python 2/3 compatibility for string types
 from six import string_types
+import warnings
 
 ip = get_ipython()
 
@@ -76,10 +77,10 @@ def _plotting(line):
                'update_rcParams()']
         _exec(cmd, line)
     except ImportError:
-        if '-v' in line:
-            print('WARNING: Could not import module `plottools`. To install,' \
-                  ' go to https://github.com/cristobal-sifon/plottools')
-        pass
+        msg = 'Could not import module `plottools` for custom plotting' \
+              ' style. To install, go to' \
+              ' https://github.com/cristobal-sifon/plottools'
+        warnings.warn(msg)
 
 
 def _print_cmd(cmd, line):
